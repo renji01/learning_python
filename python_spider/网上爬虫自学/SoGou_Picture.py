@@ -5,6 +5,8 @@ import urllib
 from bs4 import BeautifulSoup
 import json
 
+    # 爬取搜狗图片网图片
+
 # url = 'https://pic.sogou.com/pics/recommend?category=%B1%DA%D6%BD&from=home#%E5%85%A8%E9%83%A8%269'
 # res = requests.get(url)
 # soup = BeautifulSoup(res.text,'lxml')

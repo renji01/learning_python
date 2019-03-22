@@ -11,7 +11,7 @@
 
 <h1>数据获取--听课笔记</h1>
 <p>作者: renji</p>
-<img width="100px" height="100px"src="./myNameCard.jpg">
+<img class="currentImg" id="currentImg"  src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1552049932268&amp;di=627d4c28cf3f928484a101f7525db11b&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.eastlady.cn%2Fuploads%2Ftp%2F201705%2F9999%2F9e29bdc15f.png" width="100" style="top: 0px; left: 319px; width: 275.08px; height: 290px; cursor: pointer;">
 <h1>数据获取--正则表达式</h1>
 
 <p> 正则表达式是对字符串的操作的一种逻辑公式，就是用事先定义好的一些特殊字符、及这些特殊字符的组合，
@@ -50,7 +50,7 @@
 
     <tr>
     <td>+</td>
-    <td>匹配前面几个子表达式0次或多次</td>
+    <td>匹配前面几个子表达式1次或多次</td>
     </tr>
 
     <tr>
@@ -142,9 +142,13 @@
     DOM 是document object model 缩称。</br>
     这一块主要是讲dom操作器Xpath.</br>
 </p>
+<p style='color: #ff0000'>
+    在计算机语言中下标都是从[0]开始，而在Xpath匹配中默认是从[1]开始</br>
+    比如 tree.xpath('/html/body/div[1]//p') 是匹配所有子孙，但只找第一个子节点下div包含的p值</br>
+</p>
 <p>
     Xpath的语法见下图：</br>
-    <table border="3">
+    <table border="2">
         <tr>
             <th>表达式</th>
             <th>描述</th>
@@ -173,6 +177,67 @@
             <td>@</td>
             <td>选取属性</td>
         </tr>
+    </table>
 </p>
+<h2>选择属性之逻辑运算</h2>
+<p>
+选择属性的方式需要[] 括起来，比如：//*[@id="kw"] 百度输入框的xpath </br>
+</p>
+
+<h1>网站结构（知识了解）</h1>
+<h2>robbots协议 & Sitemap </h2>
+    <P>
+            robots是网站跟爬虫间的协议，用简单直接的txt格式文本方式告诉对应的爬虫被允许的权限，也就是说robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。
+        当一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，</br>
+        如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；</br>
+        如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有的页面。</br>
+    </P>
+    <p>
+        robots.txt（统一小写）应放置于网站的根目录下;</br>
+            访问举例子:https://www.jd.com/robots.txt</br>
+        User-agent: 定义搜索引擎的类型</br>
+        Disallow: 定义禁止搜索引擎收录的地址</br>
+        Allow: 定义允许搜索引擎收录的地址</br>
+            举例子：禁止所有搜索引擎对所有以/mangager/product/目录,以及/admin/和/help.html的访问，写法：</br>
+                    User-agent: *</br>
+                    Disallow: /manager/product</br>
+                    Disallow: /admin/</br>
+                    Disallow: /help.html</br>
+    </p>
+    <p>
+        Sitemap 就是网站地图，体现网站的结构。网站的所有的访问地址都会在sitemap里面体现。</br>
+    </p>
+<h2>网站结构分析</h2>
+    <p>
+        网站结构树状结构图。打开一个页面，打开的页面上还是狠多外链，通过外链打开又有很多外链。</br>
+           调试： f12运用console栏：输入命令document.getElementsByClassName("title-article") 查看页面标题。</br>
+    </p>
+<h2>深度优先 和 广度优先</h2>
+    <p>
+        深度优先就是把一个路径优先走完，广度优先是按照层级来搜索的。
+        举例子说明:
+        <img   src="url " width="100" style="left: 319px;height: 290px;">
+            深度优先遍历的结果是：  ABDECF 
+            广度优先的结果是：      ABCDEF
+    </p>
+<h2>定制抓取</h2>
+    <p>
+        
+
+
+    </p>
+<p>
+
+
+
+
+</p>
+
+
+
+
+
+
+
 </body>
 </html>

@@ -18,8 +18,11 @@ import re
 
 
 s1 = "Boeing is a USA company. USA has many giant companies, including Boeing."
-s2 = 'Total income is around $750,000 , pretty good income'
+s2 = 'Total income is around $750,000, pretty good income'
 
+print (re.findall('\\$[\\d,]+\\d+',s2))
+print (re.findall('\\$[\\d,]+',s2))
+print (re.findall('\\$[\\d]+',s2))
 # print (re.findall('\\$750,000',s2))      # ['$750,000']
 
 # print (re.findall('\\d+',s2))            # ['750', '000']
@@ -32,7 +35,7 @@ s2 = 'Total income is around $750,000 , pretty good income'
 # print(re.findall('\\d{3,}',s2))
 
 # http='<a href="http://www.baidu.com"></a>'
-# print(re.findall('href=\".*\"',http))       #匹配内链地址
+# print(re.findall('href=\".*\"',http))         #匹配内链地址
 # print(re.findall('href=\"(.*?)\"',http))[0]   #小括号表示匹配搜索结果中展示出来。
 
 # print(re.findall('[a-z,A-Z,0-9]',s2))       #利用集合的方式匹配所有字母
@@ -45,4 +48,11 @@ s2 = 'Total income is around $750,000 , pretty good income'
 
 # print(re.findall('href=\".*\"',s))
 
-s = "<h1 id='title'>辛亥革命<h1>"
+
+# s2 = 'good 7500, $3444  $5,40,340'
+# print(re.findall('\\$(\\d+)',s2))
+# print(re.findall('\\$\\d+',s2))
+#     #对匹配内容加括号表示贪婪模式，匹配就很贪，一直匹配，匹配到最后不能匹配的最后一个值
+# print(re.findall('\\$(\\d)+',s2)) 
+#     #贪婪模式匹配是三个一组 三个一组去匹配。     
+# print(re.findall('\\$(\\d\\d\\d)+',s2))

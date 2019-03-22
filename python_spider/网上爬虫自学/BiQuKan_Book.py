@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup 
 import sys
 import lxml
-# #爬取小说具体内容
+#   #爬取笔趣小说网具体内容
 # url = 'https://www.biqukan.com/25_25074/8764947.html'
 # response = requests.get(url)
 # text  = response.text
