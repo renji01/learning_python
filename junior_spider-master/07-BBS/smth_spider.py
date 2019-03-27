@@ -1,6 +1,6 @@
 from boards import BoardsCrawler
 from topics import TopicsCrawler
-from posts import PostsCrawler
+from posts  import  PostsCrawler
 
 boards_crawler = BoardsCrawler()
 topics_crawler = TopicsCrawler()

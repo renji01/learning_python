@@ -1,6 +1,6 @@
 import mysql.connector
-from mysql.connector import errorcode
-from mysql.connector import pooling
+from   mysql.connector import errorcode
+from   mysql.connector import pooling
 import time 
 
 import re
@@ -10,8 +10,9 @@ class MysqlManager:
     dbconfig = {
         "database": "smth",
         "user":     "root",
-        "password": "password",
-        "host":     "localhost"
+        "password": "123456",
+        "host":     "localhost",
+        "port": 3307
     }
 
     TABLES = {}
@@ -55,7 +56,7 @@ class MysqlManager:
 
     def __init__(self, max_num_thread):
         try:
-            cnx = mysql.connector.connect(host=self.dbconfig['host'], user=self.dbconfig['user'], password=self.dbconfig['password'])
+            cnx = mysql.connector.connect(host=self.dbconfig['host'],port=self.dbconfig['port'],user=self.dbconfig['user'], password=self.dbconfig['password'])
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
@@ -69,12 +70,15 @@ class MysqlManager:
 
         try:
             cnx.database = self.dbconfig['database']
-        except mysql.connector.Error as err:
+        #except mysql.connector.Error as err: 
+        #这里是为了处理windows 下兼容问题。
+        except Exception as err:
             if err.errno == errorcode.ER_BAD_DB_ERROR:
                 self.create_database(cursor)
                 cnx.database = self.dbconfig['database']
                 self.create_tables(cursor)
             else:
+
                 print(err)
                 exit(1)
         finally:

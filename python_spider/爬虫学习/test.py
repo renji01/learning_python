@@ -1,6 +1,6 @@
 # !/usr/bin/pyhton3
 # -*- coding:utf-8 -*-
-import re
+# import re
 
 # s = 'Total income is around $131,000, ended with 1000'
 
@@ -49,20 +49,20 @@ import re
 # print(ret3[1].text)
 
 
-from lxml import etree
+# from lxml import etree
 
-import re
+# import re
 
-with open('test.html', 'r', encoding='utf8') as f:
+# with open('test.html', 'r', encoding='utf8') as f:
 
-    c = f.read()
+#     c = f.read()
 
-s = re.sub('\n', '',c)
+# s = re.sub('\n', '',c)
 
-tree = etree.HTML(s)
+# tree = etree.HTML(s)
 
-ret = tree.xpath('//*[@class= "ref"] ')[0]
-print(ret.attrib['class'])    #ref 
+# ret = tree.xpath('//*[@class= "ref"] ')[0]
+# print(ret.attrib['class'])    #ref 
 
 # ret2 = tree.xpath('//*[@id= "title"] ')[0]
 # print(ret2.text)
@@ -75,3 +75,16 @@ print(ret.attrib['class'])    #ref
 # ret4 = tree.xpath('//*[contains(@class,"ref")]')
 # print(ret4[0].attrib['class'])
 # print(ret4[1].text)
+
+
+# line = "我自横刀向天笑b笑完我就去睡觉b睡什么睡起来嗨"
+# print (line.split('b'))
+# print (line.split("b''"))
+
+
+list1 =['i','like','machine','learning']
+
+print (list1.index("like"))
+
+del (list1[list1.index('like')])
+print (list1)
