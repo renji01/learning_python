@@ -1,24 +1,27 @@
-import re
-from lxml import etree
+#!/usr/bin/python3
+#-*-coding:utf-8 -*-
 import requests
-
+from lxml import etree
+import re
+import html 
 import time
 import global_var
-import html
 
+
+    #获取每一个帖子的内容
 class PostsCrawler:
-    
     domain = 'https://www.newsmth.net'
     pattern = re.compile('<.*?>')
 
-    def get_content(self, topic_url, page):
+    def get_content(self,topic_url,page):
         querystring = {"ajax":"","p":str(page)}
         url = self.domain + topic_url
         r = requests.get(url, params=querystring)
         self.html = r.text
         self.tree = etree.HTML(r.text)
+        
         time.sleep(global_var.crawl_interval)
-
+        # return self.html,self.tree
     def get_max_page(self):
         pages = self.tree.xpath('//ol[@class="page-main"][1]/li')
 
@@ -31,17 +34,20 @@ class PostsCrawler:
             return int(pages[len(pages)-2].xpath('a')[0].text)
         
         return int(last_page_text)
-
     def get_posts(self):
+            #显示每一个楼层用户的信息
         # users_eles = tree.xpath('//td[@class="a-left"]')
+            #显示帖子每一个楼层内容
         c_eles = self.tree.xpath('//td[@class="a-content"]')
         posts = []
-
         for c_ele in c_eles:
             post = c_ele.xpath('p')[0]
-            post = etree.tostring(post).decode('GBK')
+            post = etree.tostring(post)
+                #使用html 转义显示
+            post = html.unescape(self.pattern.sub('',post.decode('GBK')))
+                #换行显示
             post = post.replace('<br/>', '\n')
-            post = html.unescape(self.pattern.sub('', post))
+            # post = html.unescape(self.pattern.sub('', post))
             posts.append(post)
 
         return posts
@@ -64,7 +70,7 @@ if __name__ == "__main__":
                 break
     i = 1
     for p in posts:
-        print(p)
         print("=============================", i, "=============================")
+        print(p)
         print("")
         i += 1

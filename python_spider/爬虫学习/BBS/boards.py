@@ -3,28 +3,24 @@
 import requests
 from lxml import etree
 import re 
+import global_var
+import time 
 
     #抓取版本列表
 class BoardListCrawler:
-    headers = {
-        'Host': "www.newsmth.net",
-        'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:64.0) Gecko/20100101 Firefox/64.0",
-        'Accept': "application/json, text/javascript, */*; q=0.01",
-        'Accept-Language': "en-US,en;q=0.5",
-        'Accept-Encoding': "gzip, deflate",
-        'Referer': "http://www.newsmth.net/nForum/",
-        'X-Requested-With': "XMLHttpRequest",
-        'Connection': "keep-alive",
-        'Cache-Control': "max-age=0",
-        'cache-control': "no-cache"
-    }
+    
     domian = "http://www.newsmth.net"
     base_url = domian + '/nForum/section/{}?ajax'
+    def __init__(self, interval = 1):
+
+        self.interval = interval
 
         #获取版本内容
     def get_content(self,page_num):
         url = self.base_url.format(page_num)
-        response = requests.get(url, headers=self.headers)
+        response = requests.get(url, headers=global_var.headers)
+            #休息一下
+        time.sleep(self.interval)
         return response.text
         #获取版面列表
     def get_board_list(self,content):
@@ -45,7 +41,7 @@ class BoardListCrawler:
                 #使用递归函数的方式获取版面的主题数
             if len(columns[1].xpath('a')) == 0:
                 url = self.domian + board['url']
-                r = requests.get(url,headers = self.headers)
+                r = requests.get(url,headers = global_var.headers)
                 children_boards = self.get_board_list(r.text)
                 boards += children_boards
 

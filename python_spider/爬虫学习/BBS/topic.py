@@ -3,6 +3,10 @@
 import requests
 from lxml import etree
 import re
+import time
+import global_var
+
+
 #获取主题 内容
 
 class TopicsCrawler:

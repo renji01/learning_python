@@ -82,9 +82,24 @@
 # print (line.split("b''"))
 
 
-list1 =['i','like','machine','learning']
+# list1 =['i','like','machine','learning']
 
-print (list1.index("like"))
+# print (list1.index("like"))
 
-del (list1[list1.index('like')])
-print (list1)
+# del (list1[list1.index('like')])
+# print (list1)
+
+# list = [1,23,4,5,6,7,7,9,8,10]
+# x =0
+# for i in list:
+#     x+=1
+# print (x)
+
+
+attr =([1,2,5],[2,3,5],[3,4,5],[2,3,6])
+#输出行数、列数
+print(len(attr))
+print(len(attr[0]))
+for i in range(len(attr)):
+    
+    print(len(attr[i]))
