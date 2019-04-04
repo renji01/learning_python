@@ -16,6 +16,7 @@ class TopicsCrawler:
         r = requests.get(url, params=querystring)
         self.html = r.text
         self.tree = etree.HTML(r.text)
+        return self.html,self.tree
 
     def get_max_page(self):
         

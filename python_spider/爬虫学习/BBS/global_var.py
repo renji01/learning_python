@@ -11,4 +11,10 @@ headers = {
         'cache-control': "no-cache"
     }
 
-crawl_interval = 2.5
+crawl_interval = 2
+
+#代码执行顺序：
+#先执行 mysql_manager.py文件建立存储表结构
+#在执行board.py文件抓取版面信息
+#在执行topic.py文件抓取版面下的主题信息。
+#再执行post_list.py文件，抓取每个主题下的楼层信息。
