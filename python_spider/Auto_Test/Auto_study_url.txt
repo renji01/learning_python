@@ -1,0 +1,15 @@
+1、python+requests接口自动化
+https://github.com/yoyoketang/requests_python_excel.git
+
+2、基于Python3开发的接口自动化测试框架
+https://github.com/licsky/FreeTestGo.git
+
+3、接口自动化测试框架设计到开发
+https://github.com/zhangying123456/python3_interface.git
+
+
+4、python 官方文档翻译版
+https://github.com/ictar/python-doc.git
+
+5、python cookbook文档地址:
+https://github.com/yidao620c/python3-cookbook.git

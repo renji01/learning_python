@@ -59,6 +59,6 @@ class TopicsCrawler:
         
 if __name__ == "__main__":
     plc = TopicsCrawler()
-    content = plc.get_content('/nForum/board/AutoWorld', 1)
+    content = plc.get_content('/nForum/board/FamileLife', 1)
     print(plc.get_max_page())
     plc.get_topic_list()

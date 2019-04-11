@@ -3,7 +3,7 @@ from lxml import etree
 import requests
 
 import time
-import global_var
+
 import html
 
 from pic_downloader import pic_downloader
@@ -24,7 +24,7 @@ class PostsCrawler:
         self.html = r.text
         pic_downloader().get_media_files(r.text)
         self.tree = etree.HTML(r.text)
-        time.sleep(global_var.crawl_interval)
+        time.sleep(1)
 
     def get_max_page(self):
         pages = self.tree.xpath('//ol[@class="page-main"][1]/li')

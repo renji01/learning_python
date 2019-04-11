@@ -65,6 +65,7 @@ if __name__ == "__main__":
         topic = mysql_mgr.dequeue_topic()
 
         if topic is None:
+            #这里报错是因为之前爬取过了，需要再次执行下topic.py文件
             wait_tasks_done()
             exit(1)
         
