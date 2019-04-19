@@ -1,0 +1,289 @@
+# -*- coding:utf-8 -*-
+# 正则表达式学习笔记
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+
+<html>
+<body>
+
+<h1>爬虫学习笔记</h1>
+    <p>作者: renji</p>
+    <img class="currentImg" id="currentImg"  src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1552049932268&amp;di=627d4c28cf3f928484a101f7525db11b&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.eastlady.cn%2Fuploads%2Ftp%2F201705%2F9999%2F9e29bdc15f.png" width="100" style="top: 0px; left: 319px; width: 275.08px; height: 290px; cursor: pointer;">
+<h1>数据获取--正则表达式</h1>
+
+    <p> 正则表达式是对字符串的操作的一种逻辑公式，就是用事先定义好的一些特殊字符、及这些特殊字符的组合，
+        组成一个“有规则的字符串”，</br>这个“有规则的字符串”用来表达对字符串的一种过滤逻辑。
+    </p>
+    <p>在实际爬虫解析中，经常是把dom和正则表达式结合起来运用，正则表达式用于字符串特征比较明显的情况，</br>
+        但是同样的正则表达式可能在html中出现过多次，</br>而在dom中可以选择class和id 来精确的找到dom模块，从小缩小查找范围
+    </p>
+    <h2>正则表达式的规则</h2>    
+        <p>
+        <table border="2">
+            <tr>
+            <th>匹配规则</th>
+            <th>说明释义</th>
+            </tr>
+
+            <tr>
+            <td>\</td>
+            <td>转义符，如\?</td>
+            </tr>
+
+            <tr>
+            <td>^</td>
+            <td>字符串的开始</td>
+            </tr>
+
+            <tr>
+            <td>$</td>
+            <td>字符串的结束</td>
+            </tr>
+
+            <tr>
+            <td>*</td>
+            <td>匹配前面几个子表达式0次或多次</td>
+            </tr>
+
+            <tr>
+            <td>+</td>
+            <td>匹配前面几个子表达式1次或多次</td>
+            </tr>
+
+            <tr>
+            <td>?</td>
+            <td>匹配前面几个子表达式0次或1次</td>
+            </tr>
+
+            <tr>
+            <td>{n,m}</td>
+            <td>匹配至少n次，最多m次</td>
+            </tr>
+
+            <tr>
+            <td>.</td>
+            <td>匹配除\n之外的单个字符</td>
+            </tr>
+
+            <tr>
+            <td>(pattern)</td>
+            <td>匹配并获取这个匹配，</td>
+            </tr>
+
+            <tr>
+            <td>[xyz]</td>
+            <td>字符集合，匹配任何集合里的字符</td>
+            </tr>
+
+            <tr>
+            <td>[^xyz]</td>
+            <td>排除字符中的字符，不能匹配</td>
+            </tr>
+
+            <tr>
+            <td>\d</td>
+            <td>匹配一个数字，等价[0,9]</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+    以上的 {n,m}表示匹配至少n次，最多m次；</br>
+    其中 ？ = {0，1}、 * = {0,∞} 、 + ={1，∞}
+    </p>
+    <p>=======================================================================</p>
+    <p>实战代码部分演示</p>
+    <p>
+        # http=' href="http://www.baidu.com">'</br>
+        # print(re.findall('href=\".*\"',http))       #匹配内链地址 </br>
+        # print(re.findall('href=\"(.*?)\"',http))[0]   #小括号表示匹配搜索结果中展示出来。</br>
+        
+        # print(re.findall('[a-z,A-Z,0-9]',s2))       #利用集合的方式匹配所有字母</br>
+        # print(re.findall('[a-z,A-Z,0-9]+',s2))      #匹配显示所有单词</br>
+        # print(re.findall('[^0-9]+',s2))           #这里的尖括号表示匹配 非0-9的值</br>
+    </p>
+
+    <h2>
+        贪婪模式与非贪婪模式
+    </h2>
+        <p>
+        贪婪模式：</br>
+            ？该字符紧跟任何一个其他限制符（*，+，？，{n,m}） 后面时，匹配模式是贪婪的。</br>
+        非贪婪模式：</br>
+            尽可能少的匹配所搜索的字符串。</br>
+        默认贪婪模式则尽可能多的匹配所搜索的字符串</br>
+
+        </p>
+    <h2>sub 替换模式</h2>
+        <p>
+            sub 的格式：</br>
+            (?<=(pattern)) sub ( ?=pattern)</br>  
+            前限定规则，sub，后限定规则。
+            re.sub("(?<= id= 'title'>).*?(?=<)”,'戊戌变法'，c文件名)</br>
+            总结小括号的作用：</br>
+            () 括号内的内容作为返回</br>
+            (?<=)  (?=)   前限定规则，sub，后限定规则。</br>   
+        </p>
+    <h2> Match & Compile 方法</h2>
+        <p>
+            compile 函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象，是全局匹配函数</br>
+            match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none</br>
+        </p>
+        <p style='color: #ff0000',size =5;> 
+        特别注意：(full)match 函数match（）只有在0位置匹配成功的话才有返回，如果不是开始位置匹配的话，match()就返回none</br>
+        <p>
+            search函数：扫描整个字符串并返回第一个成功的匹配,否则返回none。</br>   
+        </p>
+
+<h1>数据获取---dom操作</h1>
+    <p>
+        DOM 是document object model 缩称。</br>
+        这一块主要是讲dom操作器Xpath.</br>
+    </p>
+    <p style='color: #ff0000'>
+        在计算机语言中下标都是从[0]开始，而在Xpath匹配中默认是从[1]开始</br>
+        比如 tree.xpath('/html/body/div[1]//p') 是匹配所有子孙，但只找第一个子节点下div包含的p值</br>
+    </p>
+        <p>
+            Xpath的语法见下图：</br>
+            <table border="2">
+                <tr>
+                    <th>表达式</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>nodename</td>
+                    <td>选取此节点的所有子节点，tag或*选择任意的tag</td>
+                </tr>
+                <tr>
+                    <td>/</td>
+                    <td>从根节点选取，选择直接子节点，不包括更小的后代（孙节点，从孙节点。。）</td>
+                </tr>
+                <tr>
+                    <td>//</td>
+                    <td>从当前路径选取文档的节点，而不考虑他们的位置，包含所有的后代</td>
+                </tr>
+                <tr>
+                    <td>.</td>
+                    <td>选取当前节点</td>
+                </tr>
+                <tr>
+                    <td>..</td>
+                    <td>选取当前节点的父节点</td>
+                </tr>
+                <tr>
+                    <td>@</td>
+                    <td>选取属性</td>
+                </tr>
+            </table>
+        </p>
+    <h2>选择属性之逻辑运算</h2>
+        <p>
+        选择属性的方式需要[] 括起来，比如：//*[@id="kw"] 百度输入框的xpath </br>
+        </p>
+
+<h1>网站结构（知识了解）</h1>
+    <h2>robbots协议 & Sitemap </h2>
+        <P>
+                robots是网站跟爬虫间的协议，用简单直接的txt格式文本方式告诉对应的爬虫被允许的权限，也就是说robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。
+            当一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，</br>
+            如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；</br>
+            如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有的页面。</br>
+        </P>
+        <p>
+            robots.txt（统一小写）应放置于网站的根目录下;</br>
+                访问举例子:https://www.jd.com/robots.txt</br>
+            User-agent: 定义搜索引擎的类型</br>
+            Disallow: 定义禁止搜索引擎收录的地址</br>
+            Allow: 定义允许搜索引擎收录的地址</br>
+                举例子：禁止所有搜索引擎对所有以/mangager/product/目录,以及/admin/和/help.html的访问，写法：</br>
+                        User-agent: *</br>
+                        Disallow: /manager/product</br>
+                        Disallow: /admin/</br>
+                        Disallow: /help.html</br>
+        </p>
+        <p>
+            Sitemap 就是网站地图，体现网站的结构。网站的所有的访问地址都会在sitemap里面体现。</br>
+        </p>
+    <h2>网站结构分析</h2>
+        <p>
+            网站结构树状结构图。打开一个页面，打开的页面上还是狠多外链，通过外链打开又有很多外链。</br>
+            调试： f12运用console栏：输入命令document.getElementsByClassName("title-article") 查看页面标题。</br>
+        </p>
+    <h2>深度优先 和 广度优先</h2>
+        <p>
+            深度优先就是把一个路径优先走完，广度优先是按照层级来搜索的。</br>
+            举例子说明:</br>
+            <img src='https://user-images.githubusercontent.com/46703841/54807083-0c43b200-4cb7-11e9-8da2-d040ee29f318.png',style=height:75px;></br>
+                第一列  A </br>
+                第二列  B 、C </br>
+                第三列  D、E、F </br>
+                深度优先遍历的结果是：  ABDECF </br>
+                广度优先的结果是：      ABCDEF</br>
+        </p>
+    <h2>定制抓取</h2>
+        <p>
+        
+        </p>
+
+<h1>MySQL知识点</h1>
+    <h2>mysql 基本命令</h2>
+        <p> 1、连接mysql : mysql  -hlocalhost  -uroot -p123456 -P3306 </br>
+            2、显示库：show database；</br>
+            3、切换库：use smth;</br>
+            4、显示库下的表：show tables;</br>
+            5、创建表：
+                CREATE TABLE `board` (
+                `name` varchar(64) NOT NULL,
+                `url` varchar(1024) NOT NULL,
+                `mgr_id` varchar(32) NOT NULL,
+                `mgr_url` varchar(512) NOT NULL,
+                `topics_cnt` int(11) NOT NULL,
+                `posts_cnt` int(11) NOT NULL,
+                PRIMARY KEY (`name`),
+                UNIQUE (`url`)
+                ) ENGINE=InnoDB)；</br>
+            6.显示表结构：desc board;</br>
+            7.插入数据：insert into boards (name) values ('meinv')</br>
+            8.查看表数据：select * from boards;</br>
+            9.更新表中字段数据：update boards set name='shauige' where id =1;</br>
+            10.修改表中列名、表名：alter boards rename boards_new;</br>
+            11.删除表、库：drop table/database  name;</br>
+            12.提交事务：commit </br>
+        </p>
+    <h2>mysql 连接池</h2>
+        <p>
+            一个进程多个线程的情况同时访问数据库时，为了避免每个线程频繁的创建和销毁与 mysql的服务连接，
+            一般建议使用连接池</br>
+        </p>
+    <h2>mysql connection 类</h2>
+        <p>
+            close()     释放线程对mysql连接的占用</br>
+            start_transaction() 开始一次事务</br>
+            commit()       提交一次事务，对一个事务的闭环</br>
+            cursor()       游标</br>
+        </p>
+    <h2>Mysql数据使用常用知识</h2>
+        <p>
+            index --->索引,如果没有索引，查询会进行全盘扫描，建索引为了更快的查询。</br>
+            unique 为唯一值约束。</br>
+            写入操作会加锁，select 不会。</br>
+            对数据库的操作，都必须commit才能生效。</br>
+            limit用来约束返回行数，如果没有，搜索会一直持续。</br>
+        </p>
+    <h2>多线程，多进程的理解</h2>
+        <p>
+            进程是资源分配的最小单位，线程是CPU调度的最小单位；</br>
+            进程编程调试简单可靠性高，但是创建销毁开销大；</br>
+            线程正相反，开销小，切换速度快，但是编程调试相对复杂。</br>
+        </p>
+<p>
+
+</p>
+
+
+
+</body>
+</html>

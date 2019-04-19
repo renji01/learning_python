@@ -5,12 +5,7 @@ from lxml import etree
 import re
 import html 
 import time
-<<<<<<< HEAD:Spider_Learning_By_xiaoxiang/BBS/post_list.py
 import global_var
-=======
-
-import html
->>>>>>> a891a42c2fc0b8d2b0739fd174606b919aa0ad29:junior_spider-master/10-Threads/resources/posts.py
 
 
 from mysql_manager import MysqlManager
@@ -97,7 +92,7 @@ class PostsCrawler:
         r = requests.get(url, params=querystring)
         self.html = r.text
         self.tree = etree.HTML(r.text)
-        time.sleep(1)
+        time.sleep(global_var.crawl_interval)
 
     def get_max_page(self):
         pages = self.tree.xpath('//ol[@class="page-main"][1]/li')
